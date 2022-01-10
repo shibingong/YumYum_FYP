@@ -17,7 +17,7 @@ GetIt dependency = GetIt.instance;
 void init() {
   // Services
   dependency.registerLazySingleton<RestService>(
-    () => RestService(baseUrl: 'http://192.168.0.5:3000'),
+    () => RestService(baseUrl: 'http://192.168.56.1:3000'),
   );
 
   dependency.registerLazySingleton<CounterService>(() => CounterServiceRest());
