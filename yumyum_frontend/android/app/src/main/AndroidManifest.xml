@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.exercise3">
+    package="com.example.yumyumfyp">
    <application
-        android:label="exercise3"
+        android:label="yumyumfyp"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

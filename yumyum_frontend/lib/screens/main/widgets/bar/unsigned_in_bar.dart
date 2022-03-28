@@ -1,4 +1,4 @@
-import 'package:exercise3/screens/main/main_viewmodel.dart';
+import 'package:yumyumfyp/screens/main/main_viewmodel.dart';
 import 'package:flutter/material.dart';
 
 import './bar.dart';

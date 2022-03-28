@@ -11,7 +11,7 @@ void main() {
       title: 'YumYum FYP',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      initialRoute: '/',
+      initialRoute: '/login',
       onGenerateRoute: createRoute,
     ),
   );

@@ -1,5 +1,5 @@
-import 'package:exercise3/screens/main/counter_viewmodel.dart';
-import 'package:exercise3/screens/view.dart';
+import 'package:yumyumfyp/screens/main/counter_viewmodel.dart';
+import 'package:yumyumfyp/screens/view.dart';
 import 'package:flutter/material.dart';
 
 class Body extends StatelessWidget {

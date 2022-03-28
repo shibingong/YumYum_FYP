@@ -1,4 +1,4 @@
-package com.example.exercise3
+package com.example.yumyumfyp
 
 import io.flutter.embedding.android.FlutterActivity
 
