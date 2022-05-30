@@ -13,3 +13,11 @@ module.exports.checkCredential = async (req, res) => {
         res.json({ loginStatus: 0 });
     }
 };
+
+module.exports.adminLogin = async (req, res) => {
+    const { username, password } = req.body;
+
+    const user = await User.findOne({ username: username, password: password });
+        const token = jwt.sign({ id: user._id }, "yumyumfyp");
+        res.json({ token: token });
+};

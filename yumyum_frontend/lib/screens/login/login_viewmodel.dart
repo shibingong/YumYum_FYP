@@ -1,53 +1,37 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import '../../app/auth.dart';
 import '../../app/dependencies.dart';
-import '../../services/auth/auth_service.dart';
-import '../../models/user.dart';
 import '../viewmodel.dart';
+import '../../services/login/login_service.dart';
 
-class LoginViewmodel extends Viewmodel {
-  AuthService get _service => dependency();
-  User _user = User();
-  bool _showPassword = false;
-  bool _showErrorMessage = false;
+class LoginViewModel extends Viewmodel {
+  final storage = new FlutterSecureStorage();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  GlobalKey<FormState> formKey;
 
-  get user => _user;
-  set user(value) => _user = value;
+  LoginService get dataService => dependency();
+  AuthService get authService => dependency();
 
-  get showPassword => _showPassword;
-  set showPassword(value) {
-    turnBusy();
-    _showPassword = value;
-    turnIdle();
+  LoginViewModel();
+
+  void init() async {
+    formKey = GlobalKey<FormState>();
   }
 
-  get showErrorMessage => _showErrorMessage;
-  set showErrorMessage(value) {
+  Future<bool> checkCredential() async {
     turnBusy();
-    _showErrorMessage = value;
-    turnIdle();
-  }
+    String jwt = await dataService.checkCredential(
+        usernameController.text, passwordController.text);
 
-  get username => _user.login;
-  set username(value) {
-    turnBusy();
-    _showErrorMessage = false;
-    _user.login = value;
     turnIdle();
-  }
-
-  get password => _user.password;
-  set password(value) {
-    turnBusy();
-    _showErrorMessage = false;
-    _user.password = value;
-    turnIdle();
-  }
-
-  Future<User> authenticate() async {
-    turnBusy();
-    final User _user =
-        await _service.authenticate(login: username, password: password);
-    if (_user == null) _showErrorMessage = true;
-    turnIdle();
-    return _user;
+    if (jwt != '-1') {
+      await authService.triggerLogIn(jwt);
+      return true;
+    } else {
+      return false;
+    }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 import 'viewmodel.dart';
@@ -24,7 +25,15 @@ class View extends StatelessWidget {
     if (viewmodel.busy) {
       if (_progressBuilder != null) return _progressBuilder(context, viewmodel);
       return Center(
-        child: Scaffold(body: Center(child: CircularProgressIndicator())),
+        child: Scaffold(
+            backgroundColor: Color.fromRGBO(255, 229, 204, 1),
+            body: Center(
+              // child: CircularProgressIndicator(),
+              child: SpinKitPouringHourGlassRefined(
+                color: Color.fromRGBO(255, 128, 0, 1),
+                size: 100.0,
+              ),
+            )),
       );
     }
 
