@@ -31,6 +31,7 @@ class MyRecipeViewModel extends Viewmodel {
   TextEditingController videoUrlController;
   List<TextEditingController> stepsControllers;
   List<TextEditingController> ingredientsControllers;
+  List<TextEditingController> ingredientsQuantityControllers;
   TextEditingController caloriesController;
   TextEditingController sugarController;
   TextEditingController fiberController;
@@ -94,6 +95,7 @@ class MyRecipeViewModel extends Viewmodel {
     recipeID = recipe.recipeId;
     stepsControllers = [];
     ingredientsControllers = [];
+    ingredientsQuantityControllers = [];
     steps = [];
     ingredients = [];
     (recipe.steps.length == 0) ? stepsNum = 1 : stepsNum = recipe.steps.length;
@@ -107,8 +109,13 @@ class MyRecipeViewModel extends Viewmodel {
     }
     for (int i = 0; i < ingredientsNum; i++) {
       // ingredients.add(recipe.ingredients[i]);
+      var ingredientsArray = recipe.ingredients[i].split(" of ");
+      print(ingredientsArray[0]);
+      ingredientsQuantityControllers
+          .add(TextEditingController(text: ingredientsArray[0]));
       ingredientsControllers
-          .add(TextEditingController(text: recipe.ingredients[i]));
+          .add(TextEditingController(text: ingredientsArray[1]));
+      ingredientsArray.clear();
     }
     recipeNameController = TextEditingController(text: recipe.recipeName);
     recipeDescriptionController =
@@ -147,8 +154,13 @@ class MyRecipeViewModel extends Viewmodel {
     steps.clear();
     ingredients.clear();
     stepsControllers.forEach((element) => steps.add(element.text));
-    ingredientsControllers.forEach((element) => ingredients.add(element.text));
-    print(caloriesController.text);
+    // ingredientsControllers.forEach((element) => ingredients.add(element.text));
+    for (int i = 0; i < ingredientsNum; i++) {
+      ingredients.add(ingredientsQuantityControllers[i].text +
+          " of " +
+          ingredientsControllers[i].text);
+    }
+
     turnBusy();
     // final Recipe updatedRecipe =
     await dataService.editRecipe(
@@ -203,17 +215,25 @@ class MyRecipeViewModel extends Viewmodel {
   void addIngredientsButtonOnPressed(int index) {
     ingredientsNum += 1;
     ingredientsControllers.add(TextEditingController());
+    ingredientsQuantityControllers.add(TextEditingController());
     turnIdle();
   }
 
   void removeIngredientsButtonOnPressed(int index) {
     ingredientsNum -= 1;
     ingredientsControllers.removeAt(index);
+    ingredientsQuantityControllers.removeAt(index);
     turnIdle();
   }
 
   Future<void> getNutrition() async {
-    ingredientsControllers.forEach((element) => ingredients.add(element.text));
+    // ingredientsControllers.forEach((element) => ingredients.add(element.text));
+    for (int i = 0; i < ingredientsNum; i++) {
+      ingredients.add(ingredientsQuantityControllers[i].text +
+          " of " +
+          ingredientsControllers[i].text);
+    }
+
     totalCalories = 0;
     totalSugar = 0;
     totalFiber = 0;

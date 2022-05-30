@@ -159,6 +159,8 @@ class EditRecipeScreen extends StatelessWidget {
                           ingredientsNum: viewmodel.ingredientsNum,
                           ingredientController:
                               viewmodel.ingredientsControllers,
+                          ingredientQuantityController:
+                              viewmodel.ingredientsQuantityControllers,
                           addIngredientsButtonOnPressed:
                               viewmodel.addIngredientsButtonOnPressed,
                           removeIngredientsButtonOnPressed:

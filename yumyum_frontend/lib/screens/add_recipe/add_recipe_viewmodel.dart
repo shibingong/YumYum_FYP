@@ -92,7 +92,13 @@ class AddRecipeViewModel extends Viewmodel {
     videoUrl = videoUrlController.text;
 
     stepsControllers.forEach((element) => steps.add(element.text));
-    ingredientsControllers.forEach((element) => ingredients.add(element.text));
+    // ingredientsControllers.forEach((element) => ingredients.add(element.text));
+    for (int i = 0; i < ingredientsNum; i++) {
+      ingredients.add(ingredientsQuantityControllers[i].text +
+          " of " +
+          ingredientsControllers[i].text);
+    }
+    print(ingredients);
 
     final Recipe newRecipe = await dataService.addRecipe(
         recipeName: recipeName,
@@ -157,7 +163,7 @@ class AddRecipeViewModel extends Viewmodel {
 
   Future<void> getNutrition() async {
     // ingredientsControllers.forEach((element) => ingredients.add(element.text));
-    print("total ingredients => ${ingredientsNum}");
+    // print("total ingredients => ${ingredientsNum}");
     for (int i = 0; i < ingredientsNum; i++) {
       ingredients.add(ingredientsQuantityControllers[i].text +
           " of " +
