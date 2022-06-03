@@ -28,7 +28,7 @@ class EditProfileScreen extends StatelessWidget {
               iconTheme: IconThemeData(color: Colors.black),
             ),
             // extendBodyBehindAppBar: true,
-            backgroundColor: Colors.white,
+            backgroundColor: Color.fromRGBO(255, 229, 204, 1),
             body: SingleChildScrollView(
               child: Stack(children: [
                 SingleChildScrollView(

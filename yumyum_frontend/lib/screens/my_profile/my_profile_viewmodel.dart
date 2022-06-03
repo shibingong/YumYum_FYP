@@ -91,6 +91,7 @@ class MyProfileViewModel extends Viewmodel {
     final _picker = ImagePicker();
     XFile pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
+      print("here");
       File file = File(pickedFile.path);
       String photourl = await dataService.uploadImage(file);
       user.profileImage = photourl;

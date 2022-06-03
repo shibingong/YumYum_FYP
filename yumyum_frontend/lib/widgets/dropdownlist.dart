@@ -14,7 +14,7 @@ class DropDownList extends StatelessWidget {
         padding: EdgeInsets.only(left: 12.0, right: 0, top: 1.5, bottom: 1.5),
         margin: EdgeInsets.only(right: 5, bottom: 7),
         decoration: ShapeDecoration(
-          color: Color.fromRGBO(235, 235, 235, 1),
+          color: Color.fromRGBO(255, 178, 102, 1),
           shape: RoundedRectangleBorder(
             side: BorderSide(
                 width: 1.0,

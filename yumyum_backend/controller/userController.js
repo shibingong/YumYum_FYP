@@ -1,5 +1,6 @@
 const User = require("../model/user");
 const Recipe = require("../model/recipe");
+const Feedback = require("../model/feedback");
 var fs = require('fs');
 
 module.exports.getAllUser = async (req, res) => {
@@ -27,12 +28,17 @@ module.exports.getUserById = async (req, res) => {
 
 module.exports.updateUser = async (req, res) => {
   const id = req.id;
+  const host = req.headers.host;
+  // console.log(id);
+  delete req.body.profileImage;
   const newUserData = req.body;
 
   const user = await User.findByIdAndUpdate(id, newUserData, {
     new: true,
     useFindAndModify: false,
   });
+  if (user.profileImage !== "" && !user.profileImage.includes('http'))
+    user.profileImage = `http://${host}/images/${user.profileImage}`;
   res.json(user);
 };
 
@@ -67,5 +73,6 @@ module.exports.deleteUserById = async (req, res) => {
   const userid = req.params["id"];
   await User.findByIdAndDelete(userid);
   await Recipe.deleteMany({ userID: userid });
+  await Feedback.deleteMany({ userID: userid });
   res.send("deleted");
 };
