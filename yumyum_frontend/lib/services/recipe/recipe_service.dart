@@ -17,6 +17,9 @@ abstract class RecipeService {
     String fiber,
     String sodium,
     String fat,
+    String cholesterol,
+    String protein,
+    String carbohydrates,
     File imagefile,
   });
   Future deleteRecipe(String recipeID);
@@ -34,6 +37,9 @@ abstract class RecipeService {
     String fiber,
     String sodium,
     String fat,
+    String cholesterol,
+    String protein,
+    String carbohydrates,
     File imagefile,
   });
 }

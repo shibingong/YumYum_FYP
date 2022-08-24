@@ -37,6 +37,9 @@ class MyRecipeViewModel extends Viewmodel {
   TextEditingController fiberController;
   TextEditingController sodiumController;
   TextEditingController fatController;
+  TextEditingController cholesterolController;
+  TextEditingController proteinController;
+  TextEditingController carbohydratesController;
   GlobalKey<FormState> formKey;
   int stepsNum;
   int ingredientsNum;
@@ -46,6 +49,10 @@ class MyRecipeViewModel extends Viewmodel {
   double totalFiber;
   double totalSodium;
   double totalFat;
+  double totalCholesterol;
+  double totalProtein;
+  double totalCarbohydrates;
+
   List<String> type = [
     "Breakfast",
     "Lunch",
@@ -109,7 +116,14 @@ class MyRecipeViewModel extends Viewmodel {
     }
     for (int i = 0; i < ingredientsNum; i++) {
       // ingredients.add(recipe.ingredients[i]);
-      var ingredientsArray = recipe.ingredients[i].split(" of ");
+      var ingredientsArray = [];
+      if (recipe.ingredients[i].contains(" of ")) {
+        ingredientsArray = recipe.ingredients[i].split(" of ");
+      } else {
+        var tempIngredietsArray = recipe.ingredients[i].split(" ");
+        ingredientsArray.add(tempIngredietsArray.first);
+        ingredientsArray.add(tempIngredietsArray.skip(1).join(" "));
+      }
       print(ingredientsArray[0]);
       ingredientsQuantityControllers
           .add(TextEditingController(text: ingredientsArray[0]));
@@ -126,6 +140,9 @@ class MyRecipeViewModel extends Viewmodel {
     fiberController = TextEditingController(text: recipe.fiber);
     sodiumController = TextEditingController(text: recipe.sodium);
     fatController = TextEditingController(text: recipe.fat);
+    cholesterolController = TextEditingController(text: recipe.cholesterol);
+    proteinController = TextEditingController(text: recipe.protein);
+    carbohydratesController = TextEditingController(text: recipe.carbohydrates);
     formKey = GlobalKey<FormState>();
 
     selectedType.clear();
@@ -144,6 +161,9 @@ class MyRecipeViewModel extends Viewmodel {
     totalFiber = double.parse(recipe.fiber);
     totalSodium = double.parse(recipe.sodium);
     totalFat = double.parse(recipe.fiber);
+    totalCholesterol = double.parse(recipe.cholesterol);
+    totalProtein = double.parse(recipe.protein);
+    totalCarbohydrates = double.parse(recipe.carbohydrates);
   }
 
   Future editRecipe(context) async {
@@ -156,9 +176,17 @@ class MyRecipeViewModel extends Viewmodel {
     stepsControllers.forEach((element) => steps.add(element.text));
     // ingredientsControllers.forEach((element) => ingredients.add(element.text));
     for (int i = 0; i < ingredientsNum; i++) {
-      ingredients.add(ingredientsQuantityControllers[i].text +
-          " of " +
-          ingredientsControllers[i].text);
+      if (ingredientsQuantityControllers[i]
+          .text
+          .contains(new RegExp(r'^[0-9]+$'))) {
+        ingredients.add(ingredientsQuantityControllers[i].text +
+            " " +
+            ingredientsControllers[i].text);
+      } else {
+        ingredients.add(ingredientsQuantityControllers[i].text +
+            " of " +
+            ingredientsControllers[i].text);
+      }
     }
 
     turnBusy();
@@ -176,6 +204,9 @@ class MyRecipeViewModel extends Viewmodel {
         fiber: fiberController.text,
         sodium: sodiumController.text,
         fat: fatController.text,
+        cholesterol: cholesterolController.text,
+        protein: proteinController.text,
+        carbohydrates: carbohydratesController.text,
         imagefile: tempImage);
     // if (updatedRecipe != null) {
     ScaffoldMessenger.of(context)
@@ -229,9 +260,17 @@ class MyRecipeViewModel extends Viewmodel {
   Future<void> getNutrition() async {
     // ingredientsControllers.forEach((element) => ingredients.add(element.text));
     for (int i = 0; i < ingredientsNum; i++) {
-      ingredients.add(ingredientsQuantityControllers[i].text +
-          " of " +
-          ingredientsControllers[i].text);
+      if (ingredientsQuantityControllers[i]
+          .text
+          .contains(new RegExp(r'^[0-9]+$'))) {
+        ingredients.add(ingredientsQuantityControllers[i].text +
+            " " +
+            ingredientsControllers[i].text);
+      } else {
+        ingredients.add(ingredientsQuantityControllers[i].text +
+            " of " +
+            ingredientsControllers[i].text);
+      }
     }
 
     totalCalories = 0;
@@ -239,6 +278,10 @@ class MyRecipeViewModel extends Viewmodel {
     totalFiber = 0;
     totalSodium = 0;
     totalFat = 0;
+    totalCholesterol = 0;
+    totalProtein = 0;
+    totalCarbohydrates = 0;
+
     nutrition = await nutriService.getNutrition(ingredients.join(", "));
     nutrition.forEach((element) {
       totalCalories += double.parse(element.calories);
@@ -246,6 +289,9 @@ class MyRecipeViewModel extends Viewmodel {
       totalFiber += double.parse(element.fiber);
       totalSodium += double.parse(element.sugar);
       totalFat += double.parse(element.fat);
+      totalCholesterol += double.parse(element.cholesterol);
+      totalProtein += double.parse(element.protein);
+      totalCarbohydrates += double.parse(element.carbohydrates);
     });
 
     caloriesController.text = totalCalories.toStringAsFixed(2);
@@ -253,6 +299,9 @@ class MyRecipeViewModel extends Viewmodel {
     fiberController.text = totalFiber.toStringAsFixed(2);
     sodiumController.text = totalSodium.toStringAsFixed(2);
     fatController.text = totalFat.toStringAsFixed(2);
+    cholesterolController.text = totalCholesterol.toStringAsFixed(2);
+    proteinController.text = totalProtein.toStringAsFixed(2);
+    carbohydratesController.text = totalCarbohydrates.toStringAsFixed(2);
 
     ingredients.clear();
     turnIdle();

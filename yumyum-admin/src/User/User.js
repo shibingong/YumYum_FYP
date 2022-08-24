@@ -16,7 +16,7 @@ function User(props) {
 
   useEffect(() => {
     tkn = getToken();
-    axios.get('http://localhost:3000/user/'+id, {
+    axios.get('https://yumyumbackend.herokuapp.com/user/'+id, {
       headers: {
         Authorization: 'Bearer ' + tkn
       }
@@ -38,7 +38,7 @@ function User(props) {
     // console.log(address);
     tkn = getToken();
     console.log(tkn);
-    axios.put('http://localhost:3000/user/'+id, { name: name, email: email, address: address }, {
+    axios.put('https://yumyumbackend.herokuapp.com/user/'+id, { name: name, email: email, address: address }, {
       headers: {
         Authorization: 'Bearer ' + tkn
       }

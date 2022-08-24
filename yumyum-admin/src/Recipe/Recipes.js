@@ -11,7 +11,7 @@ function Recipes(props) {
 
     useEffect(() => {
         let tkn = getToken();
-        axios.get('http://localhost:3000/recipe/user/' + id, {
+        axios.get('https://yumyumbackend.herokuapp.com/recipe/user/' + id, {
             headers: {
                 Authorization: 'Bearer ' + tkn
             }
@@ -53,6 +53,9 @@ function Recipes(props) {
                                 <li>fiber: {recipe.nutrition.fiber}g</li>
                                 <li>sodium: {recipe.nutrition.sodium}mg</li>
                                 <li>fat: {recipe.nutrition.fat}g</li>
+                                <li>cholesterol: {recipe.nutrition.cholesterol}mg</li>
+                                <li>protein: {recipe.nutrition.protein}g</li>
+                                <li>carbohydrates: {recipe.nutrition.carbohydrates}g</li>
                                 </ul></td>
                             {/* <td> <Link to={{ pathname: `/user/${user._id}`, state: user._id }} className="btn btn-primary" >Edit</Link> <button type="button" className="btn btn-danger" >Delete</button> </td> */}
                             <td>{recipe.videoUrl !== '' ?

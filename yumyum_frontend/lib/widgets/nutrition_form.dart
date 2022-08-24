@@ -8,13 +8,20 @@ class NutritionForm extends StatelessWidget {
   final TextEditingController fiberController;
   final TextEditingController sodiumController;
   final TextEditingController fatController;
+  final TextEditingController cholesterolController;
+  final TextEditingController proteinController;
+  final TextEditingController carbohydratesController;
+
   const NutritionForm(
       {Key key,
       this.caloriesController,
       this.sugarController,
       this.fiberController,
       this.sodiumController,
-      this.fatController})
+      this.fatController,
+      this.cholesterolController,
+      this.proteinController,
+      this.carbohydratesController})
       : super(key: key);
 
   @override
@@ -89,17 +96,41 @@ class NutritionForm extends StatelessWidget {
                 ),
               ),
             ),
-            Visibility(
-              visible: false,
-              child: Expanded(
-                flex: 1,
-                child: Container(
-                  padding: EdgeInsets.only(left: 5, right: 5),
-                  height: 60,
-                  child: CustomTextField(
-                    hintText: 'sugar (g)',
-                    controller: sugarController,
-                  ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                padding: EdgeInsets.only(left: 5, right: 5),
+                height: 60,
+                child: CustomTextField(
+                  hintText: 'Cholesterol (mg)',
+                  controller: cholesterolController,
+                ),
+              ),
+            ),
+          ]),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 29, right: 29, bottom: 5),
+          child: Row(children: [
+            Expanded(
+              flex: 1,
+              child: Container(
+                padding: EdgeInsets.only(left: 5, right: 5),
+                height: 60,
+                child: CustomTextField(
+                  hintText: 'Protein (g)',
+                  controller: proteinController,
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                padding: EdgeInsets.only(left: 5, right: 5),
+                height: 60,
+                child: CustomTextField(
+                  hintText: 'Carbohydrates (g)',
+                  controller: carbohydratesController,
                 ),
               ),
             ),

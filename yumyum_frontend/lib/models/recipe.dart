@@ -16,6 +16,9 @@ class Recipe {
   String fiber;
   String sodium;
   String fat;
+  String cholesterol;
+  String protein;
+  String carbohydrates;
   String recipeImage;
 
   Recipe({
@@ -32,6 +35,9 @@ class Recipe {
     @required this.fiber,
     @required this.sodium,
     @required this.fat,
+    @required this.cholesterol,
+    @required this.protein,
+    @required this.carbohydrates,
     @required this.recipeImage,
   });
 
@@ -50,6 +56,9 @@ class Recipe {
           fiber: json['nutrition']['fiber'],
           sodium: json['nutrition']['sodium'],
           fat: json['nutrition']['fat'],
+          cholesterol: json['nutrition']['cholesterol'],
+          protein: json['nutrition']['protein'],
+          carbohydrates: json['nutrition']['carbohydrates'],
           recipeImage: json['recipeImage'],
         );
 
@@ -67,6 +76,9 @@ class Recipe {
         'nutrition.fiber': fiber,
         'nutrition.sodium': sodium,
         'nutrition.fat': fat,
+        'nutrition.cholesterol': cholesterol,
+        'nutrition.protein': protein,
+        'nutrition.carbohydrates': carbohydrates,
         'recipeImage': recipeImage,
       };
 }

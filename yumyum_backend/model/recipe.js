@@ -17,6 +17,9 @@ const recipeSchema = new mongoose.Schema({
         fiber: String,
         sodium: String,
         fat: String,
+        cholesterol: String,
+        protein: String,
+        carbohydrates: String,
       },
     recipeImage: String,
 }, { versionKey: false });

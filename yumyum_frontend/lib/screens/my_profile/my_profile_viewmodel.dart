@@ -68,7 +68,7 @@ class MyProfileViewModel extends Viewmodel {
     formKey = GlobalKey<FormState>();
   }
 
-  Future updateProfile() async {
+  Future updateProfile(context) async {
     user.name = nameController.text;
     user.username = usernameController.text;
     user.password = passwordController.text;
@@ -78,7 +78,11 @@ class MyProfileViewModel extends Viewmodel {
     user.address = user.address + ", " + selectedState;
     turnBusy();
     await dataService.updateUser(user);
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text('Update success!')));
+    Navigator.of(context).pop();
     init();
+    turnIdle();
   }
 
   void dropdownStateOnChange(String newState) {

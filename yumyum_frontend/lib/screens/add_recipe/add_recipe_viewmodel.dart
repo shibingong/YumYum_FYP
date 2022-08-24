@@ -29,6 +29,9 @@ class AddRecipeViewModel extends Viewmodel {
   TextEditingController fiberController;
   TextEditingController sodiumController;
   TextEditingController fatController;
+  TextEditingController cholesterolController;
+  TextEditingController proteinController;
+  TextEditingController carbohydratesController;
   GlobalKey<FormState> formKey;
   int stepsNum;
   int ingredientsNum;
@@ -38,6 +41,9 @@ class AddRecipeViewModel extends Viewmodel {
   double totalFiber;
   double totalSodium;
   double totalFat;
+  double totalCholesterol;
+  double totalProtein;
+  double totalCarbohydrates;
 
   List<String> type = [
     "Breakfast",
@@ -80,6 +86,9 @@ class AddRecipeViewModel extends Viewmodel {
     fiberController = TextEditingController();
     sodiumController = TextEditingController();
     fatController = TextEditingController();
+    cholesterolController = TextEditingController();
+    proteinController = TextEditingController();
+    carbohydratesController = TextEditingController();
 
     tempImage = null;
     tempImagePath = '';
@@ -94,9 +103,17 @@ class AddRecipeViewModel extends Viewmodel {
     stepsControllers.forEach((element) => steps.add(element.text));
     // ingredientsControllers.forEach((element) => ingredients.add(element.text));
     for (int i = 0; i < ingredientsNum; i++) {
-      ingredients.add(ingredientsQuantityControllers[i].text +
-          " of " +
-          ingredientsControllers[i].text);
+      if (ingredientsQuantityControllers[i]
+          .text
+          .contains(new RegExp(r'^[0-9]+$'))) {
+        ingredients.add(ingredientsQuantityControllers[i].text +
+            " " +
+            ingredientsControllers[i].text);
+      } else {
+        ingredients.add(ingredientsQuantityControllers[i].text +
+            " of " +
+            ingredientsControllers[i].text);
+      }
     }
     print(ingredients);
 
@@ -112,6 +129,9 @@ class AddRecipeViewModel extends Viewmodel {
         fiber: totalFiber.toStringAsFixed(2),
         sodium: totalSodium.toStringAsFixed(2),
         fat: totalFat.toStringAsFixed(2),
+        cholesterol: totalCholesterol.toStringAsFixed(2),
+        protein: totalProtein.toStringAsFixed(2),
+        carbohydrates: totalCarbohydrates.toStringAsFixed(2),
         imagefile: tempImage);
     if (newRecipe != null) {
       ScaffoldMessenger.of(context)
@@ -165,9 +185,17 @@ class AddRecipeViewModel extends Viewmodel {
     // ingredientsControllers.forEach((element) => ingredients.add(element.text));
     // print("total ingredients => ${ingredientsNum}");
     for (int i = 0; i < ingredientsNum; i++) {
-      ingredients.add(ingredientsQuantityControllers[i].text +
-          " of " +
-          ingredientsControllers[i].text);
+      if (ingredientsQuantityControllers[i]
+          .text
+          .contains(new RegExp(r'^[0-9]+$'))) {
+        ingredients.add(ingredientsQuantityControllers[i].text +
+            " " +
+            ingredientsControllers[i].text);
+      } else {
+        ingredients.add(ingredientsQuantityControllers[i].text +
+            " of " +
+            ingredientsControllers[i].text);
+      }
     }
     print(ingredients.join(", "));
     totalCalories = 0;
@@ -175,6 +203,9 @@ class AddRecipeViewModel extends Viewmodel {
     totalFiber = 0;
     totalSodium = 0;
     totalFat = 0;
+    totalCholesterol = 0;
+    totalProtein = 0;
+    totalCarbohydrates = 0;
     nutrition = await nutriService.getNutrition(ingredients.join(", "));
     nutrition.forEach((element) {
       totalCalories += double.parse(element.calories);
@@ -182,6 +213,9 @@ class AddRecipeViewModel extends Viewmodel {
       totalFiber += double.parse(element.fiber);
       totalSodium += double.parse(element.sugar);
       totalFat += double.parse(element.fat);
+      totalCholesterol += double.parse(element.cholesterol);
+      totalProtein += double.parse(element.protein);
+      totalCarbohydrates += double.parse(element.carbohydrates);
     });
 
     caloriesController.text = totalCalories.toStringAsFixed(2);
@@ -189,6 +223,9 @@ class AddRecipeViewModel extends Viewmodel {
     fiberController.text = totalFiber.toStringAsFixed(2);
     sodiumController.text = totalSodium.toStringAsFixed(2);
     fatController.text = totalFat.toStringAsFixed(2);
+    cholesterolController.text = totalCholesterol.toStringAsFixed(2);
+    proteinController.text = totalProtein.toStringAsFixed(2);
+    carbohydratesController.text = totalCarbohydrates.toStringAsFixed(2);
 
     ingredients.clear();
     turnIdle();

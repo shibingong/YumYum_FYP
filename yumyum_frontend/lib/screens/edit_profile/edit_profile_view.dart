@@ -54,7 +54,7 @@ class EditProfileScreen extends StatelessWidget {
                           child: Container(
                             height: 60,
                             child: CustomTextField(
-                              hintText: 'username',
+                              hintText: 'Username',
                               obscured: false,
                               controller: viewmodel.usernameController,
                             ),
@@ -66,7 +66,7 @@ class EditProfileScreen extends StatelessWidget {
                           child: Container(
                             height: 60,
                             child: CustomTextField(
-                              hintText: 'password',
+                              hintText: 'Password',
                               obscured: false,
                               controller: viewmodel.passwordController,
                             ),
@@ -82,7 +82,7 @@ class EditProfileScreen extends StatelessWidget {
                                 child: Container(
                                   height: 60,
                                   child: CustomTextField(
-                                    hintText: 'city name',
+                                    hintText: 'City name',
                                     obscured: false,
                                     controller: viewmodel.addressController,
                                   ),
@@ -110,7 +110,7 @@ class EditProfileScreen extends StatelessWidget {
                           child: Container(
                             height: 60,
                             child: CustomTextField(
-                              hintText: 'email',
+                              hintText: 'Email',
                               controller: viewmodel.emailController,
                               inputType: TextInputType.emailAddress,
                             ),
@@ -119,10 +119,9 @@ class EditProfileScreen extends StatelessWidget {
                         CustomButton(
                           text: 'Update',
                           onPressed: () {
-                            viewmodel.updateProfile();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Update success!')));
-                            Navigator.of(context).pop();
+                            if (viewmodel.formKey.currentState.validate()) {
+                              viewmodel.updateProfile(context);
+                            }
                           },
                         ),
                       ],

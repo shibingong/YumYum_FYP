@@ -13,7 +13,7 @@ module.exports.getUser = async (req, res) => {
   const id = req.id;
   const user = await User.findById(id);
   if (user.profileImage !== "" && !user.profileImage.includes('http'))
-    user.profileImage = `http://${host}/images/${user.profileImage}`;
+    user.profileImage = `https://${host}/images/${user.profileImage}`;
   res.json(user);
 };
 
@@ -22,7 +22,7 @@ module.exports.getUserById = async (req, res) => {
   const id = req.params["id"];
   const user = await User.findById(id);
   if (user.profileImage !== "" && !user.profileImage.includes('http'))
-    user.profileImage = `http://${host}/images/${user.profileImage}`;
+    user.profileImage = `https://${host}/images/${user.profileImage}`;
   res.json(user);
 };
 
@@ -38,7 +38,7 @@ module.exports.updateUser = async (req, res) => {
     useFindAndModify: false,
   });
   if (user.profileImage !== "" && !user.profileImage.includes('http'))
-    user.profileImage = `http://${host}/images/${user.profileImage}`;
+    user.profileImage = `https://${host}/images/${user.profileImage}`;
   res.json(user);
 };
 
@@ -66,7 +66,7 @@ module.exports.uploadImage = async (req, res) => {
     { profileImage: name },
     { new: true, useFindAndModify: false }
   );
-  res.json(`http://${host}/images/${name}`);
+  res.json(`https://${host}/images/${name}`);
 };
 
 module.exports.deleteUserById = async (req, res) => {

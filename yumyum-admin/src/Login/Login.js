@@ -13,7 +13,7 @@ function Login({ setToken }) {
   const handleLogin = () => {
     setError(null);
     setLoading(true);
-    axios.post('http://localhost:3000/login/admin', { username: username.value, password: password.value }).then(response => {
+    axios.post('https://yumyumbackend.herokuapp.com/login/admin', { username: username.value, password: password.value }).then(response => {
       setLoading(false);
       console.log(response.data);
       setToken(response.data);

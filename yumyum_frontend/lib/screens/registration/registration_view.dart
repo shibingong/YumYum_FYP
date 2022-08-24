@@ -137,19 +137,21 @@ class RegistrationScreen extends StatelessWidget {
                         CustomButton(
                             text: 'Register',
                             onPressed: () async {
-                              await viewmodel.register().then((value) => value
-                                  ? {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
-                                              content: Text(
-                                                  'Registered Successsfully!'))),
-                                      Navigator.popUntil(
-                                          context, (route) => route.isFirst)
-                                    }
-                                  : ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                          content: Text(
-                                              'We have encountered some problem. Please try again'))));
+                              if (viewmodel.formKey.currentState.validate()) {
+                                await viewmodel.register().then((value) => value
+                                    ? {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                                content: Text(
+                                                    'Registered Successsfully!'))),
+                                        Navigator.popUntil(
+                                            context, (route) => route.isFirst)
+                                      }
+                                    : ScaffoldMessenger.of(context)
+                                        .showSnackBar(SnackBar(
+                                            content: Text(
+                                                'We have encountered some problem. Please try again'))));
+                              }
                             }),
                       ],
                     ),

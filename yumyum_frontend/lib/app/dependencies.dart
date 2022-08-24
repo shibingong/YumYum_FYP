@@ -31,7 +31,8 @@ GetIt dependency = GetIt.instance;
 void init() {
   // Services
   dependency.registerLazySingleton<RestService>(
-    () => RestService(baseUrl: 'http://172.20.10.2:3000'),
+    // () => RestService(baseUrl: 'http://10.216.96.244:3000'),
+    () => RestService(baseUrl: 'https://yumyumbackend.herokuapp.com'),
   );
   dependency.registerLazySingleton<AuthService>(() => AuthService());
   dependency.registerLazySingleton<LoginService>(() => LoginServiceRest());

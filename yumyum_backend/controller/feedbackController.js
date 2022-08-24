@@ -10,7 +10,7 @@ module.exports.getAllFeedback = async (req, res) => {
     // element.userID.profileImage = `http://${host}/images/${element.userID.profileImage}`
     let testProfileImage = element.userID.profileImage;
     if (!testProfileImage.includes('http')) {
-      element.userID.profileImage = `http://${host}/images/${element.userID.profileImage}`
+      element.userID.profileImage = `https://${host}/images/${element.userID.profileImage}`
     }
   });
 
@@ -28,7 +28,7 @@ module.exports.getFeedbackByRecipeID = async (req, res) => {
     // element.userID.profileImage = `http://${host}/images/${element.userID.profileImage}`
     let testProfileImage = element.userID.profileImage;
     if (!testProfileImage.includes('http')) {
-      element.userID.profileImage = `http://${host}/images/${element.userID.profileImage}`
+      element.userID.profileImage = `https://${host}/images/${element.userID.profileImage}`
     }
   });
 
@@ -53,7 +53,7 @@ module.exports.addFeedback = async (req, res) => {
 
   let testProfileImage = newFeedback.userID.profileImage;
   if (!testProfileImage.includes('http')) {
-    newFeedback.userID.profileImage = `http://${host}/images/${newFeedback.userID.profileImage}`
+    newFeedback.userID.profileImage = `https://${host}/images/${newFeedback.userID.profileImage}`
   }
 
   res.json(newFeedback);

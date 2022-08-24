@@ -129,6 +129,9 @@ class RecipeDetailsScreen extends StatelessWidget {
                   fiber: recipe.fiber,
                   sodium: recipe.sodium,
                   fat: recipe.fat,
+                  cholesterol: recipe.cholesterol,
+                  protein: recipe.protein,
+                  carbohydrates: recipe.carbohydrates,
                 ),
                 Container(
                   alignment: Alignment.centerLeft,
@@ -179,6 +182,9 @@ class RecipeDetailsScreen extends StatelessWidget {
                           ),
                         ]),
                   ),
+                ),
+                SizedBox(
+                  height: 50,
                 )
               ],
             ),

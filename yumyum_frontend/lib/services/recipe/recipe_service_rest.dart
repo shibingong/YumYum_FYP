@@ -41,6 +41,9 @@ class RecipeServiceRest implements RecipeService {
       String fiber,
       String sodium,
       String fat,
+      String cholesterol,
+      String protein,
+      String carbohydrates,
       File imagefile}) async {
     String base64Image = base64Encode(imagefile.readAsBytesSync());
     String fileName = imagefile.path.split("/").last;
@@ -57,6 +60,9 @@ class RecipeServiceRest implements RecipeService {
       'fiber': fiber,
       'sodium': sodium,
       'fat': fat,
+      'cholesterol': cholesterol,
+      'protein': protein,
+      'carbohydrates': carbohydrates,
       'image': base64Image,
       'imgName': fileName
     });
@@ -89,6 +95,9 @@ class RecipeServiceRest implements RecipeService {
       String fiber,
       String sodium,
       String fat,
+      String cholesterol,
+      String protein,
+      String carbohydrates,
       File imagefile}) async {
     var json = null;
     if (imagefile != null) {
@@ -101,11 +110,14 @@ class RecipeServiceRest implements RecipeService {
         'videoUrl': videoUrl,
         'steps': steps,
         'ingredients': ingredients,
-        'calories': calories,
-        'sugar': sugar,
-        'fiber': fiber,
-        'sodium': sodium,
-        'fat': fat,
+        'nutrition.calories': calories,
+        'nutrition.sugar': sugar,
+        'nutrition.fiber': fiber,
+        'nutrition.sodium': sodium,
+        'nutrition.fat': fat,
+        'nutrition.cholesterol': cholesterol,
+        'nutrition.protein': protein,
+        'nutrition.carbohydrates': carbohydrates,
         'image': base64Image,
         'imgName': fileName
       });
@@ -122,6 +134,11 @@ class RecipeServiceRest implements RecipeService {
         'nutrition.fiber': fiber,
         'nutrition.sodium': sodium,
         'nutrition.fat': fat,
+        'nutrition.cholesterol': cholesterol,
+        'nutrition.protein': protein,
+        'nutrition.carbohydrates': carbohydrates,
+        'image': '',
+        'imgName': ''
       });
     }
 

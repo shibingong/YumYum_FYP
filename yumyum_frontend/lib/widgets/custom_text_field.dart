@@ -31,6 +31,8 @@ class CustomTextField extends StatelessWidget {
                   if (inputType == TextInputType.emailAddress &&
                       !EmailValidator.validate(value)) {
                     return 'The email format is incorrect.';
+                  } else if (hintText == 'Password' && value.length < 8) {
+                    return 'The password must more than 8 characters.';
                   }
                 }
                 return null;

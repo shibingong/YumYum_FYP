@@ -68,7 +68,10 @@ class RecipeCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       CircleAvatar(
-                        backgroundImage: NetworkImage(recipe.user.profileImage),
+                        backgroundColor: Colors.white,
+                        backgroundImage: (recipe.user.profileImage != '')
+                            ? NetworkImage(recipe.user.profileImage)
+                            : AssetImage('assets/images/user.png'),
                         // backgroundImage: AssetImage('assets/images/user.png'),
                       ),
                       Text(

@@ -9,7 +9,7 @@ function Dashboard(props) {
   // console.log(users);
   useEffect(() => {
     let tkn = getToken();
-    axios.get('http://localhost:3000/user/all', {
+    axios.get('https://yumyumbackend.herokuapp.com/user/all', {
       headers: {
         Authorization: 'Bearer ' + tkn
       }
@@ -31,7 +31,7 @@ function Dashboard(props) {
       confirmButtonText: 'Yes',
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete('http://localhost:3000/user/' + id, {
+        axios.delete('https://yumyumbackend.herokuapp.com/user/' + id, {
           headers: {
             Authorization: 'Bearer ' + tkn
           }

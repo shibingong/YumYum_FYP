@@ -122,6 +122,12 @@ class AddRecipeScreen extends StatelessWidget {
                             items: (viewmodel.type as List)
                                 .map((e) => MultiSelectItem(e, e))
                                 .toList(),
+                            validator: (values) {
+                              if ((values == null || values.isEmpty)) {
+                                return 'This field cannot be empty.';
+                              }
+                              return null;
+                            },
                             title: Text("Type"),
                             selectedColor: Colors.orange,
                             decoration: BoxDecoration(
@@ -210,6 +216,11 @@ class AddRecipeScreen extends StatelessWidget {
                           fiberController: viewmodel.fiberController,
                           sodiumController: viewmodel.sodiumController,
                           fatController: viewmodel.fatController,
+                          cholesterolController:
+                              viewmodel.cholesterolController,
+                          proteinController: viewmodel.proteinController,
+                          carbohydratesController:
+                              viewmodel.carbohydratesController,
                         ),
                         Divider(
                           color: Colors.grey,
